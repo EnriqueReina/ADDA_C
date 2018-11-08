@@ -8,157 +8,101 @@
  ============================================================================
  */
 
+#define NULL ( (void *) 0)
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "../includes/int_list.h"
+#include <string.h>
 
-int myIndex;
+int cuentaCaracteres(char *s);
+char *stringMasLargoIterativo(char* lista[],int tam);
+char *stringMasLargoRecursivoFinalReal(char* lista[], int tam);
+char *stringMasLargoRecursivoFinal(char* lista[], int i, int acu, int a, int tam, char *res);
 
-int_list ordenaRecursivo(int_list l1, int_list l2,int i, int j, int k, int_list *res);
-int_list ordenaIterativo(int_list l1, int_list l2);
-int_list ordenaRecursivoFinal(int_list l1, int_list l2);
-void imprime_lista_enteros(int_list ls, char principio, char entre, char fin);
+int main() {
 
-int main(void) {
 
-	int_list l1 = empty_int_list(5);
-	int_list l2 = empty_int_list(5);
+	char *str1 = "HolA sOY eNRique";
+	char *str2 = "aaaa";
+	char *str3 = "ajdiofn fneko";
+	char *str4 = "nifeAHIHI doiee";
+	char *str5 = "vjdojvovdovr doiee";
 
-	l1.data[0] = 1;
-	l1.data[1] = 4;
-	l1.data[2] = 8;
-	l1.data[3] = 10;
-	l1.data[4] = 12;
+	char* lista[5] = {str1,str2,str3,str4,str5};
 
-	l2.data[0] = -6;
-	l2.data[1] = 5;
-	l2.data[2] = 7;
-	l2.data[3] = 20;
-	l2.data[4] = 24;
+	int a = sizeof(lista);
+	int b = sizeof(lista[0]);
+	int tam = a/b;
 
-	int_list iterativo = ordenaIterativo(l1,l2);
-	int_list recursivoFinal = ordenaRecursivoFinal(l1,l2);
+	//Iterativo
 
-	puts("Ordena lista iterativo: ");
-	imprime_lista_enteros(iterativo, '[',',',']');
-	puts("");
-	puts("Ordena lista recursivo final: ");
-	imprime_lista_enteros(recursivoFinal, '[',',',']');
+	char *res = stringMasLargoIterativo(lista,tam);
+	int x = cuentaCaracteres(res);
+	printf("El string más largo (Iterativo): \n");
+	printf("%s --> %d caracteres en minusculas\n",res,x);
 
-	return EXIT_SUCCESS;
+	//Recursivo
+	printf("\n");
+	printf("El string más largo (Recursivo Final): \n");
+	printf("%s --> %d caracteres en minusculas\n",stringMasLargoRecursivoFinalReal(lista,tam),x);
+
+
+   return (0);
 }
 
-int_list ordenaIterativo(int_list l1, int_list l2)
+int cuentaCaracteres(char *s)
 {
-	int_list res = empty_int_list(20);
+	int lower = 0;
 	int i = 0;
-	int j = 0;
 
-	int k = 0;
-
-	while(i < l1.tam && j < l2.tam)
+	while (i < strlen(s))
 	{
-		int first = l1.data[i];
-		int second = l2.data[j];
-
-		if(first > second)
-		{
-			res.data[k] = second;
-			j++;
-		}
-		else if(first == second)
-		{
-			res.data[k] = first;
-			i++;
-			j++;
-		}
-		else
-		{
-			res.data[k] = first;
-			i++;
-		}
-
-		k++;
+		if (s[i] >= 'a' && s[i] <= 'z')
+			lower++;
+	      i++;
 	}
 
-	if(i != l1.tam)
-	{
-		for(int x = i; x < l1.tam; x++)
-		{
-			res.data[k] = l1.data[x];
-			k++;
-		}
-	}
-
-	if(j != l2.tam)
-	{
-		for(int x = j; x < l2.tam; x++)
-		{
-			res.data[k] = l2.data[x];
-			k++;
-		}
-	}
-
-	myIndex = k;
-	return res;
+	return lower;
 }
 
-int_list ordenaRecursivoFinal(int_list l1, int_list l2)
+char *stringMasLargoIterativo(char* lista[],int tam)
 {
-	int_list res = empty_int_list(l1.tam+l2.tam);
-	return ordenaRecursivo(l1,l2,0,0,0,&res);
+	int i = 0;
+	int acu = 0;
+	char *mayor;
+	while(i < tam)
+	{
+		if(cuentaCaracteres(lista[i]) > acu)
+		{
+			acu = cuentaCaracteres(lista[i]);
+			mayor = lista[i];
+		}
+
+		i++;
+	}
+
+	return mayor;
 }
 
-int_list ordenaRecursivo
-(int_list l1, int_list l2,int i, int j, int k, int_list *res)
+char *stringMasLargoRecursivoFinalReal(char* lista[], int tam)
 {
-	if(i == l1.tam && j == l2.tam)
-		return *res;
+	char *res = "";
+	return stringMasLargoRecursivoFinal(lista,0,0,0,tam,res);
+}
+
+char *stringMasLargoRecursivoFinal(char* lista[], int i, int acu, int a, int tam, char *res)
+{
+	if(i == tam)
+		return res;
 	else
 	{
-		if(i == l1.tam)
+		if(cuentaCaracteres(lista[i]) > acu)
 		{
-			res->data[k] = l2.data[j];
-			return ordenaRecursivo(l1,l2,i,j+1,k+1,res);
+			acu = cuentaCaracteres(lista[i]);
+			a = i;
 		}
-		else if(j == l2.tam)
-		{
-			res->data[k] = l1.data[i];
-			return ordenaRecursivo(l1,l2,i+1,j,k+1,res);
-		}
-		else
-		{
-			if(l1.data[i] > l2.data[j])
-			{
-				res->data[k] = l2.data[j];
-				return ordenaRecursivo(l1,l2,i,j+1,k+1,res);
-			}
-			else if(l1.data[i] == l2.data[j])
-			{
-				res->data[k] = l1.data[i];
-				return ordenaRecursivo(l1,l2,i+1,j+1,k+1,res);
-			}
-			else
-			{
-				res->data[k] = l1.data[i];
-				return ordenaRecursivo(l1,l2,i+1,j,k+1,res);
-			}
-		}
+		return stringMasLargoRecursivoFinal(lista,i+1,acu,a,tam,lista[a]);
 	}
-}
-
-void imprime_lista_enteros(int_list ls, char principio, char entre, char fin)
-{
-	printf("%c",principio);
-	for(int i = 0; i < myIndex; i++)
-	{
-		if(i == myIndex-1)
-			printf("%d", ls.data[i]);
-		else
-			printf("%d%c ", ls.data[i], entre);
-	}
-	printf("%c",fin);
-	printf("\n");
 }
 
 
