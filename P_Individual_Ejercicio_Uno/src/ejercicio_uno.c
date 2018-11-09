@@ -17,6 +17,7 @@
 int cuentaCaracteres(char *s);
 char *stringMasLargoIterativo(char* lista[],int tam);
 char *stringMasLargoRecursivoFinalReal(char* lista[], int tam);
+int cuentaCaracterRecursivo(char *str, int i, int res);
 char *stringMasLargoRecursivoFinal(char* lista[], int i, int acu, int a, int tam, char *res);
 
 int main() {
@@ -90,15 +91,30 @@ char *stringMasLargoRecursivoFinalReal(char* lista[], int tam)
 	return stringMasLargoRecursivoFinal(lista,0,0,0,tam,res);
 }
 
+int cuentaCaracterRecursivo(char *str, int i, int res)
+{
+
+	if(i >= strlen(str))
+		return res;
+	else
+	{
+		if (str[i] >= 'a' && str[i] <= 'z')
+			return cuentaCaracterRecursivo(str,i+1,res+1);
+		else
+			return cuentaCaracterRecursivo(str,i+1,res);
+	}
+}
+
 char *stringMasLargoRecursivoFinal(char* lista[], int i, int acu, int a, int tam, char *res)
 {
 	if(i == tam)
 		return res;
 	else
 	{
-		if(cuentaCaracteres(lista[i]) > acu)
+		int temp = cuentaCaracterRecursivo(lista[i],0,0);
+		if(temp > acu)
 		{
-			acu = cuentaCaracteres(lista[i]);
+			acu = temp;
 			a = i;
 		}
 		return stringMasLargoRecursivoFinal(lista,i+1,acu,a,tam,lista[a]);

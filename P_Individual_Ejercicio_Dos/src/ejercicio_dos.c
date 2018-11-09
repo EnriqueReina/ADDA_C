@@ -4,7 +4,7 @@
  Author      : Enrique Reina
  Version     :
  Copyright   : Illo no te copie por favoh
- Description : Hello World in C, Ansi-style
+ Description : Fusion Listas
  ============================================================================
  */
 
@@ -83,18 +83,20 @@ int_list ordenaIterativo(int_list l1, int_list l2)
 
 	if(i != l1.tam)
 	{
-		for(int x = i; x < l1.tam; x++)
+		while(i < l1.tam)
 		{
-			res.data[k] = l1.data[x];
+			res.data[k] = l1.data[i];
+			i++;
 			k++;
 		}
 	}
 
 	if(j != l2.tam)
 	{
-		for(int x = j; x < l2.tam; x++)
+		while(j < l2.tam)
 		{
-			res.data[k] = l2.data[x];
+			res.data[k] = l2.data[j];
+			j++;
 			k++;
 		}
 	}
