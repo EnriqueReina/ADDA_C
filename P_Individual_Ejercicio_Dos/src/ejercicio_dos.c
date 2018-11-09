@@ -22,7 +22,7 @@ void imprime_lista_enteros(int_list ls, char principio, char entre, char fin);
 int main(void) {
 
 	int_list l1 = empty_int_list(5);
-	int_list l2 = empty_int_list(5);
+	int_list l2 = empty_int_list(9);
 
 	l1.data[0] = 1;
 	l1.data[1] = 4;
@@ -35,6 +35,11 @@ int main(void) {
 	l2.data[2] = 7;
 	l2.data[3] = 20;
 	l2.data[4] = 24;
+	l2.data[5] = 25;
+	l2.data[6] = 26;
+	l2.data[7] = 30;
+	l2.data[8] = 35;
+
 
 	int_list iterativo = ordenaIterativo(l1,l2);
 	int_list recursivoFinal = ordenaRecursivoFinal(l1,l2);
