@@ -116,8 +116,7 @@ int_list ordenaRecursivoFinal(int_list l1, int_list l2)
 	return ordenaRecursivo(l1,l2,0,0,0,&res);
 }
 
-int_list ordenaRecursivo
-(int_list l1, int_list l2,int i, int j, int k, int_list *res)
+int_list ordenaRecursivo (int_list l1, int_list l2,int i, int j, int k, int_list *res)
 {
 	if(i == l1.tam && j == l2.tam)
 		return *res;
