@@ -23,7 +23,7 @@ char *stringMasLargoRecursivoFinal(char* lista[], int i, int acu, int a, int tam
 int main() {
 
 
-	char *str1 = "HolA sOY eNRique";
+	char *str1 = "HolA sOY eNRiqueeeeeeeeeeeeeeeeeeeeeeeeeee";
 	char *str2 = "aaaa";
 	char *str3 = "ajdiofn fneko";
 	char *str4 = "nifeAHIHI doiee";
