@@ -20,28 +20,33 @@ char *stringMasLargoRecursivoFinalReal(char* lista[], int tam);
 int cuentaCaracterRecursivo(char *str, int i, int res);
 char *stringMasLargoRecursivoFinal(char* lista[], int i, int acu, int a, int tam, char *res);
 
+
 int main() {
 
 
-	char *str1 = "HolA sOY eNRiqueeeeeeeeeeeeeeeeeeeeeeeeeee";
-	char *str2 = "aaaa";
-	char *str3 = "ajdiofn fneko";
-	char *str4 = "nifeAHIHI doiee";
-	char *str5 = "vjdojvovdovr doiee";
-
-	char* lista[5] = {str1,str2,str3,str4,str5};
+	char *s1 = "qwerty";
+	char *s2 = "qwertY";
+	char *s3 = "qwerTY";
+	char *s4 = "qweRTY";
+	char *s5 = "qwERTY";
+	char *s6 = "qWERTY";
+	char *s7 = "QWERTY";
+	char* lista[7] = {s1,s2,s3,s4,s5,s6,s7};
 
 	int a = sizeof(lista);
 	int b = sizeof(lista[0]);
 	int tam = a/b;
 
+	printf("De la lista de strings: \n");
+	for(int i = 0; i < 7; i++)
+	{
+		printf("%s\n",lista[i]);
+	}
 	//Iterativo
-
 	char *res = stringMasLargoIterativo(lista,tam);
 	int x = cuentaCaracteres(res);
-	printf("El string más largo (Iterativo): \n");
+	printf("\nEl string más largo (Iterativo): \n");
 	printf("%s --> %d caracteres en minusculas\n",res,x);
-
 	//Recursivo
 	printf("\n");
 	printf("El string más largo (Recursivo Final): \n");
@@ -50,6 +55,7 @@ int main() {
 
    return (0);
 }
+
 
 int cuentaCaracteres(char *s)
 {
@@ -91,6 +97,10 @@ char *stringMasLargoRecursivoFinalReal(char* lista[], int tam)
 	return stringMasLargoRecursivoFinal(lista,0,0,0,tam,res);
 }
 
+
+
+
+
 int cuentaCaracterRecursivo(char *str, int i, int res)
 {
 
@@ -120,5 +130,9 @@ char *stringMasLargoRecursivoFinal(char* lista[], int i, int acu, int a, int tam
 		return stringMasLargoRecursivoFinal(lista,i+1,acu,a,tam,lista[a]);
 	}
 }
+
+
+
+
 
 
