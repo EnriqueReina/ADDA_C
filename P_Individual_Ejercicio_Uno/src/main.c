@@ -12,7 +12,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "../includes/ej_uno.h"
 
 int main() {
@@ -27,24 +26,20 @@ int main() {
 	char *s7 = "QWERTY";
 	char* lista[7] = {s1,s2,s3,s4,s5,s6,s7};
 
-	int a = sizeof(lista);
-	int b = sizeof(lista[0]);
-	int tam = a/b;
-
 	printf("De la lista de strings: \n");
 	for(int i = 0; i < 7; i++)
 	{
 		printf("%s\n",lista[i]);
 	}
 	//Iterativo
-	char *res = stringMasLargoIterativo(lista,tam);
+	char *res = stringMasLargoIterativo(lista);
 	int x = cuentaCaracteres(res);
 	printf("\nEl string más largo (Iterativo): \n");
 	printf("%s --> %d caracteres en minusculas\n",res,x);
 	//Recursivo
 	printf("\n");
 	printf("El string más largo (Recursivo Final): \n");
-	printf("%s --> %d caracteres en minusculas\n",stringMasLargoRecursivoFinalReal(lista,tam),x);
+	printf("%s --> %d caracteres en minusculas\n",stringMasLargoRecursivoFinalReal(lista),x);
 
 
    return (0);

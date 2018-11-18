@@ -1,7 +1,6 @@
 #include "../includes/ej_uno.h"
 
-
-
+//Metodo auxiliar que me cuenta el numero de minusculas
 int cuentaCaracteres(char *s)
 {
 	int lower = 0;
@@ -17,8 +16,14 @@ int cuentaCaracteres(char *s)
 	return lower;
 }
 
-char *stringMasLargoIterativo(char* lista[],int tam)
+
+//Me devuelve el elemento con el mayor numero de minsuculas
+char *stringMasLargoIterativo(char* lista[])
 {
+	int a = sizeof(lista);
+	int b = sizeof(lista[0]);
+	int tam = a/b;
+
 	int i = 0;
 	int acu = 0;
 	char *mayor;
@@ -36,16 +41,19 @@ char *stringMasLargoIterativo(char* lista[],int tam)
 	return mayor;
 }
 
-char *stringMasLargoRecursivoFinalReal(char* lista[], int tam)
+
+//LLama al recursivo que de verdad
+char *stringMasLargoRecursivoFinalReal(char* lista[])
 {
+	int a = sizeof(lista);
+	int b = sizeof(lista[0]);
+	int tam = a/b;
+
 	char *res = "";
 	return stringMasLargoRecursivoFinal(lista,0,0,0,tam,res);
 }
 
-
-
-
-
+//Metodo auxliar en recursivo
 int cuentaCaracterRecursivo(char *str, int i, int res)
 {
 
@@ -60,6 +68,8 @@ int cuentaCaracterRecursivo(char *str, int i, int res)
 	}
 }
 
+
+//Me devuelve el elemento con el mayor numero de minsuculas recursivo
 char *stringMasLargoRecursivoFinal(char* lista[], int i, int acu, int a, int tam, char *res)
 {
 	if(i == tam)
@@ -75,9 +85,4 @@ char *stringMasLargoRecursivoFinal(char* lista[], int i, int acu, int a, int tam
 		return stringMasLargoRecursivoFinal(lista,i+1,acu,a,tam,lista[a]);
 	}
 }
-
-
-
-
-
 
